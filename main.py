@@ -11,7 +11,7 @@ class Game:
     def __init__(self,board):
         self.board = board
         self.human = Player("", self.board)
-        self.arti = Player("",self.board)
+        self.arti = Player("", self.board)
 
     def start_game(self) -> None:
         human_turn = True
@@ -53,9 +53,6 @@ class Game:
             winner = self.human.piece if not human_turn else self.arti.piece
             print("WINNER!!! " + winner )
         
-
-
-
 
 if __name__ == "__main__":
     board = Board()

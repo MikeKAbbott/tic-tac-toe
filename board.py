@@ -9,11 +9,6 @@ class Board():
         }
         self.pieces = ["X","O"]
         self.moves = []
-        self.scores = {
-            "O": 1,
-            "X":-1,
-            "TIE":0
-        }
     
     """
     Basic function to print the board in the terminal
@@ -28,7 +23,7 @@ class Board():
     """
     Checks if the move is valid
     """
-    def valid_move(self,move) -> bool:
+    def valid_move(self,move:int) -> bool:
         return self.board[move] == " "
     
     """
@@ -36,7 +31,7 @@ class Board():
     """
     def clear_board(self) -> None:
         self.moves.clear()
-        for i in range(1,10,1):
+        for i in self.board:
             self.board[i] = " " 
 
     """
@@ -45,7 +40,7 @@ class Board():
     def get_moves(self) -> None:
         self.moves.clear()
         for item in self.board:
-            if self.board[item] not in self.pieces:
+            if self.board[item] == " ":
                 self.moves.append(item)
     
     """
@@ -68,7 +63,6 @@ class Board():
                     winner = piece
         return winner
                 
-
 
     """
     Asks the player to make a valid move on the
