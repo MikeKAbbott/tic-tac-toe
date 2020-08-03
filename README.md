@@ -5,7 +5,7 @@ its best move against the player.
 How to play:
   1. Clone the repository into your folder of choice.
   2. Run python3 main.py and play
-  3. From top to bottom, left to right, the spaces are assigned a number 1 - 9
+  3. From top to bottom, left to right, the spaces are assigned a number 1 - 9.
      Choose a number to choose your space.
      
 
