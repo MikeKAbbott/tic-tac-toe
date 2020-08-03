@@ -7,13 +7,13 @@ plays against the AI until there is a winner or
 a tie is made
 """
 class Game: 
-    
     def __init__(self,board):
         self.board = board
         self.human = Player("", self.board)
         self.arti = Player("", self.board)
 
     def start_game(self) -> None:
+        self.board.clear_board()
         human_turn = True
         while True:
             try:
@@ -34,7 +34,7 @@ class Game:
                     try:
                         self.board.print_board()
                         player_move = int(input("Choose a space "))
-                        if (isinstance(player_move,int)) and player_move in self.board.moves:
+                        if player_move in self.board.moves:
                             self.board.make_move(player_move,self.human)
                             break
                         print("Invalid Move")
@@ -48,11 +48,19 @@ class Game:
         self.board.print_board()
         if self.board.is_board_full():
             winner = "TIE"
+            print("-------------")
             print("TIE GAME")
+            print("-------------")
         else:
             winner = self.human.piece if not human_turn else self.arti.piece
+            print("-------------")
             print("WINNER!!! " + winner )
-        
+            print("-------------")
+
+        newGame =  input("New Game? Y or N: ")
+        if newGame.upper() == "Y":
+            self.start_game()
+
 
 if __name__ == "__main__":
     board = Board()

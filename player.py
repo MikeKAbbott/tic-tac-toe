@@ -24,15 +24,17 @@ class Player:
     
     def mini_max(self,board,depth:int, isMax:bool) -> int:
         scores = {
-            "O": 1,
-            "X": -1,
+            "O": 1 if self.piece == "O" else -1,
+            "X": -1 if self.piece == "O" else 1,
             "TIE":0
         }
         result = board.check_winner()
         if result != None:
-            return scores[result]   
+            return scores[result]
+
         bestScore = -math.inf if isMax else math.inf
         human = "X" if self.piece == "O" else "O"
+
         for index in board.board:
             if board.valid_move(index):
                 temp = board.board[index]
