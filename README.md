@@ -7,5 +7,6 @@ How to play:
   2. Run python3 main.py and play
   3. From top to bottom, left to right, the spaces are assigned a number 1 - 9.
      Choose a number to choose your space.
+  4. First to three in a row wins.
      
 
