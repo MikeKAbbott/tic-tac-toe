@@ -11,24 +11,26 @@ class Game:
         self.board = board
         self.human = Player("", self.board)
         self.arti = Player("", self.board)
+        self.turn = False
 
     def start_game(self) -> None:
         self.board.clear_board()
-        human_turn = True
+        #Human chooses a character
         while True:
             try:
-                champion = input("Choose your chamption: X or O: ")
-                if champion.upper() in self.board.pieces:
-                    self.human.piece = champion.upper()   
+                character = input("Choose your character: X or O: ")
+                if character.upper() in self.board.pieces:
+                    self.human.piece = character.upper()   
                     self.arti.piece = "O" if (self.human.piece.upper() == "X") else "X"
                     break
-                print("Invalid champion")
+                print("Invalid character")
             except Exception as e:
                 print(e)
-
+        #main game loop that breaks if the bool is full, or there is a winner
+        self.turn = False if self.human.piece == "O" else True
         while not self.board.is_board_full() and self.board.check_winner() == None:
-            if human_turn:
-                human_turn = False
+            if self.turn:
+                self.turn = False
                 self.board.get_moves()
                 while True:
                     try:
@@ -43,21 +45,24 @@ class Game:
             else:
                 best_move = self.arti.best_move()
                 self.board.make_move(best_move,self.arti)
-                human_turn = True
+                self.turn = True
         
         self.board.print_board()
+        #if the game is a tie
         if self.board.is_board_full():
             winner = "TIE"
             print("-------------")
             print("TIE GAME")
             print("-------------")
+        #if there isa  winner
         else:
-            winner = self.human.piece if not human_turn else self.arti.piece
+            winner = self.human.piece if not self.turn else self.arti.piece
             print("-------------")
             print("WINNER!!! " + winner )
             print("-------------")
-
-        newGame =  input("New Game? Y or N: ")
+       
+        #Ask the player if they want to play another game
+        newGame =  input("New Game? Y/N: ")
         if newGame.upper() == "Y":
             self.start_game()
 

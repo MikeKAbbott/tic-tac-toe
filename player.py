@@ -7,7 +7,7 @@ class Player:
         self.piece = piece
         self.board = board
 
-
+    #Choose the best move with the AI
     def best_move(self) -> int:
         bestScore = -math.inf
         bestMove = None
@@ -22,7 +22,9 @@ class Player:
                     bestMove = index
         return bestMove
     
+    #Mini max recursive function to find the best outcome 
     def mini_max(self,board,depth:int, isMax:bool) -> int:
+        #scores for the outcome of every path for the AI
         scores = {
             "O": 1 if self.piece == "O" else -1,
             "X": -1 if self.piece == "O" else 1,
@@ -31,10 +33,11 @@ class Player:
         result = board.check_winner()
         if result != None:
             return scores[result]
-
+        
         bestScore = -math.inf if isMax else math.inf
         human = "X" if self.piece == "O" else "O"
-
+        #bulk of the mini max function, goes through every move to find
+        #the winning outcome 
         for index in board.board:
             if board.valid_move(index):
                 temp = board.board[index]
